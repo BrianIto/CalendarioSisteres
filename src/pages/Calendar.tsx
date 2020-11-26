@@ -1,6 +1,6 @@
 import React from 'react'
-// @ts-ignore
-import moment from 'moment/min/moment-with-locales.min'
+import moment from 'moment'
+import "moment/locale/pt-br"
 import "./Calendar.sass"
 import {Moment} from "moment";
 import {Almoco} from "../DAOs/AlmocoDAO";
