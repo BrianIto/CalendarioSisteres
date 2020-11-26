@@ -6,7 +6,7 @@ import "./Calendar.sass"
 import {Moment} from "moment";
 import {Almoco} from "../DAOs/AlmocoDAO";
 
-const Calendar = ({app} : {app: Realm.App}) => {
+const Calendar = ({app}: { app: Realm.App }) => {
     const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
     const wks = ["1", "2", "3", "4", "5"];
 
@@ -25,7 +25,7 @@ const Calendar = ({app} : {app: Realm.App}) => {
                 week.push(moment(x));
                 x.add(1, 'days');
             }
-            weeksAux[j+""] = week;
+            weeksAux[j + ""] = week;
         }
         setWeeks(weeksAux);
     }, []);
@@ -37,7 +37,7 @@ const Calendar = ({app} : {app: Realm.App}) => {
         });
     }, [])
 
-    const getAlmocoFromThatDay = (day : Moment, almocos : Array<Almoco>) : Almoco | null => {
+    const getAlmocoFromThatDay = (day: Moment, almocos: Array<Almoco>): Almoco | null => {
         for (let almoco of almocos) {
             if (day.isSame(new Date(almoco.dia), 'day')) {
                 return almoco;
@@ -61,22 +61,22 @@ const Calendar = ({app} : {app: Realm.App}) => {
                             (<td
                                 className={day.isSame(currentMonth, 'month') ? '' : 'not_month'}
                                 onClick={() => {
-                                    let nome = prompt("Informe o nome da Família");
-                                    if (nome && nome !== '') {
-                                        let telefone = prompt("Informe um Telefone para Contato");
-                                        // setAlmocos([...almocos, ])
-                                        const almoco = {
-                                            nome: nome,
-                                            telefone: telefone,
-                                            dia: day.add(3, 'hours').toDate()
-                                        }
-                                        app.currentUser?.callFunction("insertAlmoco", almoco).then(res => {
-                                            console.log("Adicionado com sucesso", res);
-                                            app.currentUser?.callFunction("getAlmocos").then(res => {
-                                                setAlmocos(res)
+                                    if (!getAlmocoFromThatDay(day, almocos) && day.isSame(currentMonth, 'month')) {
+                                        let nome = prompt("Informe o nome da Família");
+                                        if (nome && nome !== '') {
+                                            let telefone = prompt("Informe um Telefone para Contato");
+                                            const almoco = {
+                                                nome: nome,
+                                                telefone: telefone,
+                                                dia: day.add(3, 'hours').toDate()
+                                            }
+                                            app.currentUser?.callFunction("insertAlmoco", almoco).then(res => {
+                                                console.log("Adicionado com sucesso", res);
+                                                app.currentUser?.callFunction("getAlmocos").then(res => {
+                                                    setAlmocos(res)
+                                                })
                                             })
-                                        })
-
+                                        }
                                     }
                                 }}
                                 key={day.format('DD/MM')}>
