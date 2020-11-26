@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import moment from 'moment'
 import "moment/locale/pt-br"
@@ -10,6 +11,7 @@ const Calendar = ({app} : {app: Realm.App}) => {
     const wks = ["1", "2", "3", "4", "5"];
 
     const [weeks, setWeeks] = React.useState({1: [], 2: [], 3: [], 4: [], 5: []});
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [currentMonth, setCurrentMonth] = React.useState(moment(new Date()).add(1, 'month'));
     const [almocos, setAlmocos] = React.useState<any>([])
 
