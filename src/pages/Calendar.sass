@@ -1,0 +1,32 @@
+p, h1
+  margin: 0
+  text-align: center
+p
+  margin-bottom: 35px
+h1
+  margin-top: 25px
+
+.calendar_table
+  width: 100%
+  text-align: center
+  thead
+    font-weight: 600
+    td
+      padding-bottom: 20px
+  tbody
+    .not_month
+      border: none
+      color: #CCC
+      &:hover
+        background-color: #FFF
+    td
+      width: calc(100% / 7)
+      height: 90px
+      cursor: pointer
+      transition: all .2s ease-in-out
+      border: 1px solid #CCC
+      background-color: #FFF
+      &:hover
+        background-color: #F0F0F0
+      p
+        margin: 0
