@@ -12,14 +12,14 @@ const Calendar = ({app}: { app: Realm.App }) => {
 
     const [weeks, setWeeks] = React.useState({1: [], 2: [], 3: [], 4: [], 5: []});
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [currentMonth, setCurrentMonth] = React.useState(moment(new Date()).add(1, 'month'));
+    const [currentMonth, setCurrentMonth] = React.useState(moment(new Date()));
     const [almocos, setAlmocos] = React.useState<any>([])
 
     React.useEffect(() => {
         let weeksAux = {...weeks};
         for (let j = 1; j < 6; j++) {
             const week = [];
-            let x = moment(new Date()).add(1, 'month').startOf('month').startOf('week').add(j - 1, 'weeks');
+            let x = moment(new Date()).startOf('month').startOf('week').add(j - 1, 'weeks');
             for (let i = 0; i < 7; i++) {
                 // @ts-ignore
                 week.push(moment(x));
@@ -49,7 +49,7 @@ const Calendar = ({app}: { app: Realm.App }) => {
     return (
         <div>
             <h1>Calendário de Almoço</h1>
-            <p> Mês de {moment(new Date()).locale('pt-BR').add(1, 'month').format('MMMM')} - <i>Ala Guarany</i></p>
+            <p> Mês de {moment(new Date()).locale('pt-BR').format('MMMM')} - <i>Ala Guarany</i></p>
             <table className={'calendar_table'}>
                 <thead>
                 {weekDays.map((weekday) => (<td key={weekday}>{weekday}</td>))}
